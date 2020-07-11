@@ -13,7 +13,7 @@ namespace Bonject.Campaign.API.Controllers
 
         public string Index()
         {
-            return "Campaign";
+            return "Campaign 2";
         }
     }
 }
