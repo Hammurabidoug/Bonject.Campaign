@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["Bonject.Campaign.API/Bonject.Campaign.API.csproj", "Bonject.Campaign.API/"]
-RUN dotnet restore "Bonject.Campaign.API/Bonject.Campaign.API.csproj"
+COPY ["Bonject.Campaign.API.csproj", "Bonject.Campaign.API.csproj"]
+RUN dotnet restore "Bonject.Campaign.API.csproj"
 COPY . .
-WORKDIR "/src/Bonject.Campaign.API"
+WORKDIR "/src"
 RUN dotnet build "Bonject.Campaign.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
