@@ -17,4 +17,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build Bonject.Campaign.API/. --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+      run: docker build . --file Bonject.Campaign.API/Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
