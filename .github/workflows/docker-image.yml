@@ -19,8 +19,10 @@ jobs:
             login-server: bonject.azurecr.io
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
+
+        - name: 'Build and push'
           working-directory: Bonject.Campaign.API
-        - run: |
+          run: |
             docker build . -t bonject.azurecr.io/campaign.api:latest
             docker push bonject.azurecr.io/campaign.api:latest
 
