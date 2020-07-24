@@ -28,7 +28,7 @@ jobs:
       run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
       working-directory: Bonject.Campaign.API
 
-    - name: 'Build and push'
+    - name: 'Build and push it'
       working-directory: Bonject.Campaign.API
       run: |
         docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
