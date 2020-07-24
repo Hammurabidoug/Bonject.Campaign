@@ -1,13 +1,5 @@
-name: Docker Image CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-env:
-  DOCKER_IMAGE_NAME: 'bonject.azurecr.io/campaign.api'
+on: [push]
+name: Linux_Container_Workflow
 
 jobs:
     build-and-deploy:
@@ -31,12 +23,13 @@ jobs:
             docker build .t bonject.azurecr.io/campaign.api:latest
             docker push bonject.azurecr.io/campaign.api:latest
 
-    - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
-        with:
-          resource-group: BonjectContainers
-          image: ${{env.DOCKER_IMAGE_NAME}}:latest
-          registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          name: bonject
-          location: 'East US 2'
+        - name: 'Deploy to Azure Container Instances'
+          uses: 'azure/aci-deploy@v1'
+          with:
+            resource-group: BonjectContainers
+            dns-name-label: url-for-container
+            image: bonject.azurecr.io/campaign.api:latest
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: bonject
+            location: 'west us'
