@@ -8,6 +8,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: 'bonject.azurecr.io/campaign.api'
+
 jobs:
 
   build:
@@ -15,6 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Bonject.Campaign.API/Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - run: |
+        docker build . --file Bonject.Campaign.API/Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+        docker push '${{env.DOCKER_IMAGE_NAME}}':latest
