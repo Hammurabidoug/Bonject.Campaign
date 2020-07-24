@@ -25,5 +25,6 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - run: |
-        docker build . --file Bonject.Campaign.API/Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+        docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
         docker push '${{env.DOCKER_IMAGE_NAME}}':latest
+        working-directory: Bonject.Campaign.API
