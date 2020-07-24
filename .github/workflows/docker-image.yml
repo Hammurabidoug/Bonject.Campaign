@@ -33,3 +33,13 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
         docker push '${{env.DOCKER_IMAGE_NAME}}':latest
+
+    - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+          resource-group: BonjectContainers
+          image: '${{env.DOCKER_IMAGE_NAME}}':latest
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: bonject
+          location: 'East US 2'
