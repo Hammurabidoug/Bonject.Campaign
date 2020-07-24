@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace Bonject.Campaign.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class HomeController : ControllerBase
     {
 
         public string Index()
         {
-            return "Campaign 2";
+            return "Campaign 4";
         }
     }
 }
