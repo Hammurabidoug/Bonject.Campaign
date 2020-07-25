@@ -1,21 +1,25 @@
-name: prerelease NuGet
+name: Publish Packages
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # also works with windows-latest and macos-latest
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
-      shell: bash
-    - name: Publish nuget
-      run: |
-           for f in ./[repository]/bin/Release/*.nupkg
-           do
-             curl -vX PUT -u "Hammurabidoug:${{ secrets.GHPackagesToken }}" -F package=@$f https://nuget.pkg.github.com/[user]/
-           done
-      shell: bash
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Publish Bonject.Campaign.Abstractions
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: Bonject.Campaign.Abstractions/Bonject.Campaign.Abstractions.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
