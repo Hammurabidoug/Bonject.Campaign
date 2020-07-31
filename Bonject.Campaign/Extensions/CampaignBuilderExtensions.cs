@@ -9,7 +9,8 @@ namespace Bonject.Campaign.Extensions
     {
         public static CampaignBuilder WithCajolingInitiation(this CampaignBuilder builder)
         {
-            //builder.Services.AddSingleton<IInitiationStrategy, Cajo>
+            builder.WithInitiationStrategy<CajoleInitiationStrategy>();
+
             return builder;
         }
     }

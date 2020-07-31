@@ -7,6 +7,6 @@ namespace Bonject.Campaign.Abstractions
     {
         string Name { get; set; }
 
-        Task<IInitiatedEvent> Initiate(IInitiationStrategy strategy);
+        Task<IInitiatedEvent> Initiate();
     }
 }

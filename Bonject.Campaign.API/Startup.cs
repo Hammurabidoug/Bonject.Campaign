@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bonject.Campaign.DependencyInjection;
+using Bonject.Campaign.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +16,9 @@ namespace Bonject.Campaign.API
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCampaign()
+                .WithCajolingInitiation();
+
             services.AddControllers();
         }
 
