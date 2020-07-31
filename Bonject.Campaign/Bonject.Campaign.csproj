@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bonject.Campaign.Abstractions" Version="1.0.2" />
+    <PackageReference Include="Bonject.Campaign.DependencyInjection" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
